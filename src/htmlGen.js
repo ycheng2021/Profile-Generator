@@ -20,5 +20,19 @@ const generateEngineerCard = (engineer) => {
 }
 
 const generateInternCard = (intern) => {
-    
+
+}
+
+const baseHtml = (htmlData) => `
+BASE HTML CONTENT HERE
+
+${createHtmlData()}
+`
+
+
+module.exports = {
+    generateManagerCard,
+    generateEngineerCard,
+    generateInternCard,
+    baseHtml
 }

@@ -6,11 +6,19 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
+const {
+    generateManagerCard,
+    generateEngineerCard,
+    generateInternCard,
+    baseHtml
+} =  require('./src/htmlGen')
+
+
 // empty array for the generated HTML to be pushed into
 const TeamHtmlArray = [];
 
 function createHtmlData() {
-    return TeamHtmlArray.join("")
+    return TeamHtmlArray.join(" ")
 }
 
 // questions specifically for managers
@@ -54,7 +62,7 @@ function mainMenu(){
                 case 'Intern':
                     return createIntern();
                 default: 
-                    return generateHtml;
+                    return generateHtml();
             }
         })
 }
@@ -79,15 +87,16 @@ function createIntern(){
         .prompt(internQuestions)
 }
 
-function generateHtml(fileName, data){
-    fs.writeFile(fileName, createHtmlData(data), (err) =>
-    err ? console.log(err) : console.log("Success!")) 
+function generateHtml(){
+    fs.writeFile("./dist/index.html", baseHtml(createHtmlData), (err) =>
+    err ? console.log(err) : console.log("Success! Generated HTML file.")) 
 }
 
 function init() {
-  createManager();
-  createEngineer();
-  createIntern();
+    mainMenu();
+    createManager();
+    createEngineer();
+    createIntern();
 };
 
 init();
