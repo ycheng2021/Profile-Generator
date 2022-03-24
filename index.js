@@ -6,33 +6,168 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
+const {
+    generateManagerCard,
+    generateEngineerCard,
+    generateInternCard,
+    baseHtml
+} =  require('./src/htmlGen')
+
+
 // empty array for the generated HTML to be pushed into
 const TeamHtmlArray = [];
-
-function createHtmlData() {
-    return TeamHtmlArray.join("")
-}
 
 // questions specifically for managers
 const managerQuestions = [
     { 
         type: 'input',
         name: 'name',
-        message: 'What is the manager\'s\ number?',
+        message: 'What is the manager\'s\ name?',
+        validate: function (answer) {
+            if (answer.length < 1) {
+                console.log("A valid name is required")
+                return false
+            } else {
+                return true;
+            }
+        }
     },
     {
-
+        type: 'input',
+        name: 'id',
+        message: 'What is the manager\'s\ ID?',
+        validate: function (answer) {
+            if (answer.length < 1 || isNaN(answer)) {
+                console.log("A valid ID is required")
+                return false
+            } else {
+                return true;
+            }
+        }
     },
+    { 
+        type: 'input',
+        name: 'email',
+        message: 'What is the manager\'s\ email?',
+        validate: function ValidateEmail(email){
+            const mailformat = new RegExp(/^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{1,}([\.\-]{0,1}[a-zA-Z]){0,}[a-zA-Z0-9]{0,}$/i)
+            return mailformat.test(email)
+        }
+    },
+    { 
+        type: 'input',
+        name: 'officeNumber',
+        message: 'What is the manager\'s\ office number?',
+        validate: function (answer) {
+            if (answer.length < 1 || isNaN(answer)) {
+                console.log("A valid office number is required")
+                return false
+            } else {
+                return true;
+            }
+        }
+    }
 ];
 
 // questions specifically for engineers
 const engineerQuestions = [
-
+    { 
+        type: 'input',
+        name: 'name',
+        message: 'What is the engineer\'s\ name?',
+        validate: function (answer) {
+            if (answer.length < 1) {
+                console.log("A valid name is required")
+                return false
+            } else {
+                return true;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'id',
+        message: 'What is the engineer\'s\ ID?',
+        validate: function (answer) {
+            if (answer.length < 1 || isNaN(answer)) {
+                console.log("A valid ID is required")
+                return false;
+            } else {
+                return true;
+            }
+        }
+    },
+    { 
+        type: 'input',
+        name: 'email',
+        message: 'What is the engineer\'s\ email?',
+        validate: function ValidateEmail(email){
+            const mailformat = new RegExp(/^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{1,}([\.\-]{0,1}[a-zA-Z]){0,}[a-zA-Z0-9]{0,}$/i)
+            return mailformat.test(email)
+        }
+    },
+    { 
+        type: 'input',
+        name: 'github',
+        message: 'What is the engineer\'s\ Github username?',
+        validate: function (answer) {
+            const usernameFormat = new RegExp(/^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i)
+            return usernameFormat.test(answer)
+        }
+    }
 ];
 
 // questions specifically for interns
 const internQuestions = [
-
+    { 
+        type: 'input',
+        name: 'name',
+        message: 'What is the intern\'s\ name?',
+        validate: function (answer) {
+            if (answer.length < 1) {
+                console.log("A valid name is required")
+                return false
+            } else {
+                return true;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'id',
+        message: 'What is the intern\'s\ ID?',
+        validate: function (answer) {
+            if (answer.length < 1 || isNaN(answer)) {
+                answer.value = "";
+                console.log("A valid ID is required")
+                return false;
+            } else {
+                return true;
+            }
+        }
+    },
+    { 
+        type: 'input',
+        name: 'email',
+        message: 'What is the intern\'s\ email?',
+        validate: function ValidateEmail(email){
+            const mailformat = new RegExp(/^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{1,}([\.\-]{0,1}[a-zA-Z]){0,}[a-zA-Z0-9]{0,}$/i)
+            return mailformat.test(email)
+        }
+    },
+    { 
+        type: 'input',
+        name: 'school',
+        message: 'What is the intern\'s\ school?',
+        validate: function (answer) {
+            if (answer.length < 1) {
+                console.log("A valid school is required")
+                return false
+            } else {
+                return true;
+            }
+        }
+    }
 ];
 
 function mainMenu(){
@@ -54,7 +189,7 @@ function mainMenu(){
                 case 'Intern':
                     return createIntern();
                 default: 
-                    return generateHtml;
+                    return generateHtml();
             }
         })
 }
@@ -72,22 +207,30 @@ function createManager(){
 function createEngineer(){
     inquirer
         .prompt(engineerQuestions)
+        .then(({ name, id, email, github}) => {
+            const engineer = new Engineer(name, id, email, github)
+            TeamHtmlArray.push(generateEngineerCard(engineer))
+            mainMenu()
+        })
 }
 
 function createIntern(){
     inquirer
         .prompt(internQuestions)
+        .then(({ name, id, email, school}) => {
+            const intern = new Intern(name, id, email, school)
+            TeamHtmlArray.push(generateInternCard(intern))
+            mainMenu()
+        })
 }
 
-function generateHtml(fileName, data){
-    fs.writeFile(fileName, createHtmlData(data), (err) =>
-    err ? console.log(err) : console.log("Success!")) 
+function generateHtml(){
+    fs.writeFile("./dist/index.html", baseHtml(TeamHtmlArray.join(" ")), (err) =>
+    err ? console.log(err) : console.log("Success! Generated HTML file.")) 
 }
 
 function init() {
-  createManager();
-  createEngineer();
-  createIntern();
+    mainMenu();
 };
 
 init();
