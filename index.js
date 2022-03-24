@@ -27,8 +27,9 @@ const managerQuestions = [
             if (answer.length < 1) {
                 console.log("A valid name is required")
                 return false
+            } else {
+                return true;
             }
-            return true;
         }
     },
     {
@@ -36,11 +37,12 @@ const managerQuestions = [
         name: 'id',
         message: 'What is the manager\'s\ ID?',
         validate: function (answer) {
-            if (answer.length < 1) {
+            if (answer.length < 1 || isNaN(answer)) {
                 console.log("A valid ID is required")
                 return false
+            } else {
+                return true;
             }
-            return true;
         }
     },
     { 
@@ -48,8 +50,8 @@ const managerQuestions = [
         name: 'email',
         message: 'What is the manager\'s\ email?',
         validate: function ValidateEmail(email){
-        const mailformat = new RegExp(/^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{1,}([\.\-]{0,1}[a-zA-Z]){0,}[a-zA-Z0-9]{0,}$/i)
-        return mailformat.test(email)
+            const mailformat = new RegExp(/^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{1,}([\.\-]{0,1}[a-zA-Z]){0,}[a-zA-Z0-9]{0,}$/i)
+            return mailformat.test(email)
         }
     },
     { 
@@ -57,11 +59,12 @@ const managerQuestions = [
         name: 'officeNumber',
         message: 'What is the manager\'s\ office number?',
         validate: function (answer) {
-            if (answer.length < 1) {
+            if (answer.length < 1 || isNaN(answer)) {
                 console.log("A valid office number is required")
                 return false
+            } else {
+                return true;
             }
-            return true;
         }
     }
 ];
@@ -72,21 +75,45 @@ const engineerQuestions = [
         type: 'input',
         name: 'name',
         message: 'What is the engineer\'s\ name?',
+        validate: function (answer) {
+            if (answer.length < 1) {
+                console.log("A valid name is required")
+                return false
+            } else {
+                return true;
+            }
+        }
     },
     {
         type: 'input',
         name: 'id',
-        message: 'What is the engineer\'s\ ID?'
+        message: 'What is the engineer\'s\ ID?',
+        validate: function (answer) {
+            if (answer.length < 1 || isNaN(answer)) {
+                console.log("A valid ID is required")
+                return false;
+            } else {
+                return true;
+            }
+        }
     },
     { 
         type: 'input',
         name: 'email',
         message: 'What is the engineer\'s\ email?',
+        validate: function ValidateEmail(email){
+            const mailformat = new RegExp(/^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{1,}([\.\-]{0,1}[a-zA-Z]){0,}[a-zA-Z0-9]{0,}$/i)
+            return mailformat.test(email)
+        }
     },
     { 
         type: 'input',
         name: 'github',
-        message: 'What is the engineer\'s\ Github username?'
+        message: 'What is the engineer\'s\ Github username?',
+        validate: function (answer) {
+            const usernameFormat = new RegExp(/^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i)
+            return usernameFormat.test(answer)
+        }
     }
 ];
 
@@ -96,21 +123,50 @@ const internQuestions = [
         type: 'input',
         name: 'name',
         message: 'What is the intern\'s\ name?',
+        validate: function (answer) {
+            if (answer.length < 1) {
+                console.log("A valid name is required")
+                return false
+            } else {
+                return true;
+            }
+        }
     },
     {
         type: 'input',
         name: 'id',
-        message: 'What is the intern\'s\ ID?'
+        message: 'What is the intern\'s\ ID?',
+        validate: function (answer) {
+            if (answer.length < 1 || isNaN(answer)) {
+                answer.value = "";
+                console.log("A valid ID is required")
+                return false;
+            } else {
+                return true;
+            }
+        }
     },
     { 
         type: 'input',
         name: 'email',
         message: 'What is the intern\'s\ email?',
+        validate: function ValidateEmail(email){
+            const mailformat = new RegExp(/^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{1,}([\.\-]{0,1}[a-zA-Z]){0,}[a-zA-Z0-9]{0,}$/i)
+            return mailformat.test(email)
+        }
     },
     { 
         type: 'input',
         name: 'school',
-        message: 'What is the intern\'s\ school?'
+        message: 'What is the intern\'s\ school?',
+        validate: function (answer) {
+            if (answer.length < 1) {
+                console.log("A valid school is required")
+                return false
+            } else {
+                return true;
+            }
+        }
     }
 ];
 

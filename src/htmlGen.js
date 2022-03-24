@@ -9,7 +9,7 @@ const generateManagerCard = (manager) => {
         <div class="info">
         <ul class="list-group list-group-flush">
             <li class="list-group-item"> ID: ${manager.getId()}</li>
-            <li class="list-group-item"> Email: <a href='mailto:${manager.getEmail()}'>${manager.getEmail()}</li>
+            <li class="list-group-item"> Email: <a href='mailto:${manager.getEmail()}'>${manager.getEmail()}</a></li>
             <li class="list-group-item"> Office Number: ${manager.getOfficeNumber()}</li>
         </ul>
         </div>
@@ -27,8 +27,8 @@ const generateEngineerCard = (engineer) => {
         <div class="info">
         <ul class="list-group list-group-flush">
             <li class="list-group-item"> ID: ${engineer.getId()}</li>
-            <li class="list-group-item"> Email: <a href='mailto:${engineer.getEmail()}'>${engineer.getEmail()}</li>
-            <li class="list-group-item"> Github: ${engineer.getGithub()}</li>
+            <li class="list-group-item"> Email: <a href='mailto:${engineer.getEmail()}'>${engineer.getEmail()}</a></li>
+            <li class="list-group-item"> Github: <a href='https://github.com/${engineer.getGithub()}' target=_blank>${engineer.getGithub()}</a></li>
         </ul>
         </div>
     </div>
@@ -45,7 +45,7 @@ const generateInternCard = (intern) => {
         <div class="info">
         <ul class="list-group list-group-flush">
             <li class="list-group-item"> ID: ${intern.getId()}</li>
-            <li class="list-group-item"> Email: <a href='mailto:${intern.getEmail()}'>${intern.getEmail()}</li>
+            <li class="list-group-item"> Email: <a href='mailto:${intern.getEmail()}'>${intern.getEmail()}</a></li>
             <li class="list-group-item"> School: ${intern.getSchool()}</li>
         </ul>
         </div>
@@ -68,20 +68,20 @@ const baseHtml = (htmlData) => `
 
 <body>
     <nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand" href="#">Team Profiles</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-        <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-        </li>
-    </ul>
-    </div>
+        <a class="navbar-brand" href="#">Team Profiles</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
     <div class="info-container">
