@@ -17,31 +17,57 @@ const {
 // empty array for the generated HTML to be pushed into
 const TeamHtmlArray = [];
 
-function createHtmlData() {
-    return TeamHtmlArray.join(" ")
-}
-
 // questions specifically for managers
 const managerQuestions = [
     { 
         type: 'input',
         name: 'name',
         message: 'What is the manager\'s\ name?',
+        validate: function (answer) {
+            if (answer.length < 1) {
+                console.log("A valid name is required")
+                return false
+            }
+            return true;
+        }
     },
     {
         type: 'input',
         name: 'id',
-        message: 'What is the manager\'s\ ID?'
+        message: 'What is the manager\'s\ ID?',
+        validate: function (answer) {
+            if (answer.length < 1) {
+                console.log("A valid ID is required")
+                return false
+            }
+            return true;
+        }
     },
     { 
         type: 'input',
         name: 'email',
         message: 'What is the manager\'s\ email?',
+        validate: function ValidateEmail(inputText){
+        const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if(inputText.value.match(mailformat)) {
+                return true;
+            } else {
+            console.log("A valid email address is required");
+            return false;
+            }
+        }
     },
     { 
         type: 'input',
         name: 'officeNumber',
-        message: 'What is the manager\'s\ office number?'
+        message: 'What is the manager\'s\ office number?',
+        validate: function (answer) {
+            if (answer.length < 1) {
+                console.log("A valid office number is required")
+                return false
+            }
+            return true;
+        }
     }
 ];
 
@@ -148,15 +174,12 @@ function createIntern(){
 }
 
 function generateHtml(){
-    fs.writeFile("./dist/index.html", baseHtml(createHtmlData), (err) =>
+    fs.writeFile("./dist/index.html", baseHtml(TeamHtmlArray.join(" ")), (err) =>
     err ? console.log(err) : console.log("Success! Generated HTML file.")) 
 }
 
 function init() {
     mainMenu();
-    createManager();
-    createEngineer();
-    createIntern();
 };
 
 init();
