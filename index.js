@@ -47,14 +47,9 @@ const managerQuestions = [
         type: 'input',
         name: 'email',
         message: 'What is the manager\'s\ email?',
-        validate: function ValidateEmail(inputText){
-        const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-            if(inputText.value.match(mailformat)) {
-                return true;
-            } else {
-            console.log("A valid email address is required");
-            return false;
-            }
+        validate: function ValidateEmail(email){
+        const mailformat = new RegExp(/^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{1,}([\.\-]{0,1}[a-zA-Z]){0,}[a-zA-Z0-9]{0,}$/i)
+        return mailformat.test(email)
         }
     },
     { 
