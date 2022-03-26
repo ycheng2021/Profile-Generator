@@ -37,7 +37,6 @@ const managerQuestions = [
         message: 'What is the manager\'s\ ID?',
         validate: function (answer) {
             if (answer.length < 1 || isNaN(answer)) {
-                // console.log("A valid ID is required")
                 return "A valid ID is required"
             } else {
                 return true;
@@ -90,7 +89,7 @@ const engineerQuestions = [
         name: 'id',
         message: 'What is the engineer\'s\ ID?',
         validate: function (answer) {
-            if (answer.length < 1 || !isNaN(answer)) {
+            if (answer.length < 1 || isNaN(answer)) {
                 return "A valid ID is required"
             } else {
                 return true;
@@ -233,7 +232,7 @@ function createIntern(){
 }
 
 function generateHtml(){
-    fs.writeFile("./dist/index.html", baseHtml(TeamHtmlArray.join(" ")), (err) =>
+    fs.writeFile("./index.html", baseHtml(TeamHtmlArray.join(" ")), (err) =>
     err ? console.log(err) : console.log("Success! Generated HTML file.")) 
 }
 
